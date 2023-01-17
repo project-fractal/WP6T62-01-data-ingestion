@@ -214,3 +214,74 @@ pip install faust
   * [Useful information](https://faust.readthedocs.io/en/latest/introduction.html)
 
 
+## MQTT Cloud Communications Component
+
+A secondary MQTT component to provide the Fractal node with a lightweight communication system is included.
+
+These steps will set up a container with an MQTT broker and a set of python programs to test the publish/subscribe functionalities:
+
+1. Clone the project
+
+```
+git clone https://github.com/project-fractal/WP6T62-01-data-ingestion.git
+
+cd WP6T62-01-data-ingestion/mosquitto
+```
+
+2. (Optional) Configure the mosquitto.conf file in case you nees special requirementes located at `/mosquitto/config/mosquitto.conf`
+
+
+3. Run the container
+
+```
+# Run the default container
+source run.sh
+```
+
+4. Test the container communication:
+
+Open a terminal session:
+
+```
+cd test-com
+pip install -r requirements.txt
+
+python3 test-publish.py
+
+```
+In a different session:
+
+```
+python3 test-publish.py
+```
+
+And check that both the publisher and subscriber work correctly.
+
+
+
+**Additional useful commands:**
+
+* Download the docker image `docker pull eclipse-mosquitto`
+* Run the container and configure ports or volumes:
+
+`docker run -it -d -p 1883:<your default port> -p 8853:<your SSL port>  -v $PATH/mosquitto/config:/mosquitto/config -v $PATH/mosquitto/log:/mosquitto/log -v $PATH/mosquitto/data:/mosquitto/data  eclipse-mosquitto`
+
+**Comments:**
+
+Mosquitto default conf is used with:
+
+listener 1883 #--> Port 1883
+allow_anonymous true #--> No client-id is filtered
+persistence true
+persistence_location /mosquitto/data/
+log_dest file /mosquitto/log/mosquitto.log
+
+### Useful links and more information on MQTT
+
+* Docker image:
+  * [eclipse-mosquitto DockerHub](https://hub.docker.com/_/eclipse-mosquitto/)
+
+* Mosquitto documentation:
+  * [mosquitto.conf man page](https://mosquitto.org/man/mosquitto-conf-5.html)
+  * [Mosquitto auth methods](
+https://mosquitto.org/documentation/authentication-methods/)
