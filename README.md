@@ -196,10 +196,6 @@ To install Faust, just run:
 pip install faust
 ```
 
-
-
-### RISCV32 (Low-End Node)
-
 ## Additional Documentation and Acknowledgments
 
 * NiFi Documentation:
@@ -216,3 +212,5 @@ pip install faust
 * Faust Documentation:
   * [Documentation](https://faust.readthedocs.io/en/latest/)
   * [Useful information](https://faust.readthedocs.io/en/latest/introduction.html)
+
+
